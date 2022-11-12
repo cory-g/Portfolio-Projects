@@ -1,5 +1,5 @@
 /*	Queries for Tableau Visualization: COVID Infections/Deaths
-	https://public.tableau.com/app/profile/cory.gargan/viz/COVIDDataDashboardNov2022/Dashboard1 */
+	https://public.tableau.com/app/profile/cory.gargan/viz/COVIDDataInfectionsDeathsNov2022/Dashboard1 */
 	
 
 
