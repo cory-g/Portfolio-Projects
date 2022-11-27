@@ -1,3 +1,3 @@
-## Portfolio-Projects
+# Portfolio-Projects
 
-#  Cleaning & Manipulating Raw Data in SQL
+## Cleaning & Manipulating Raw Data in SQL
