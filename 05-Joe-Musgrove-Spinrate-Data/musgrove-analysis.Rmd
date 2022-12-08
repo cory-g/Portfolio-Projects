@@ -2,7 +2,10 @@
 title: "Joe Musgrove Pitching Data"
 author: "Cory Gargan"
 date: "2022-12-08"
-output: html_document
+output:
+  github_document: default
+  html_document: default
+  pdf_document: default
 ---
 # Taking a Closer Look at Joe Musgrove's Spinrate
 #### Did he use a foreign substance to increase spinrate, and if so, did it have a significant impact on his Post Season?  
