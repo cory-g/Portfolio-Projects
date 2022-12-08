@@ -3,7 +3,7 @@ library(tidyverse)
 library(skimr)
 library(janitor)
 library(gridExtra)
-spinrate <- read_csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/05-Joe-Musgrove-Spinrate-Data/MLB_Musgrove-Joe_Reg-Post-Season_Pitch-Data.csv")
+spinrate <- read_csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/01-MLB-Spinrate-Data-in-R/MLB_Musgrove-Joe_Reg-Post-Season_Pitch-Data.csv")
 
 
 ################################################################################

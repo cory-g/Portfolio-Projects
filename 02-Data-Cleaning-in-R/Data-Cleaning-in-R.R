@@ -4,10 +4,10 @@ library(skimr)
 library(janitor)
 library(lubridate)
 library(readxl)
-housing <- read.csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/04-Data-Cleaning-in-R/Nashville-Housing-Data.csv")
+housing <- read.csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/02-Data-Cleaning-in-R/Nashville-Housing-Data.csv")
 
 # Import Excel Worksheet
-# housing <- read_excel("~/Documents/Data-Analysis/Github/Portfolio-Projects/04-Data-Cleaning-in-R/Nashville-Housing-Data.xlsx")
+# housing <- read_excel("~/Documents/Data-Analysis/Github/Portfolio-Projects/02-Data-Cleaning-in-R/Nashville-Housing-Data.xlsx")
 
 
 # Data Cleaning in R
@@ -108,6 +108,6 @@ housing <- housing %>%
 
 # Export the Dataframe to CSV File
 
-write_csv(housing, "~/Documents/Data-Analysis/Github/Portfolio-Projects/04-Data-Cleaning-in-R/Nashville-Housing-Data-CLEANED.csv")
+write_csv(housing, "~/Documents/Data-Analysis/Github/Portfolio-Projects/02-Data-Cleaning-in-R/Nashville-Housing-Data-CLEANED.csv")
 
 
