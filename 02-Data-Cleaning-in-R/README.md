@@ -3,7 +3,7 @@ Cleaning Nashville Housing Data in R
 Cory Gargan
 2022-12-08
 
-# Cleaning a Raw Dataset for further use
+# Cleaning a Raw Dataset for further Analysis
 
 #### I took this raw dataset containing Nashville housing data and made it clean and usable. I made responses consistent, columns more search & sort friendly, and populated any missing property addresses.
 
