@@ -42,7 +42,7 @@ When looking at the Data there is a very clear increase in Post Season
 Spinrate
 
 - 4-Seam Fastball +90.31 RPM  
-- Changup +101.95 RPM  
+- Changeup +101.95 RPM  
 - Curveball +116.26 RPM  
 - Cutter +83.30 RPM  
 - Sinker +79.35 RPM  
@@ -73,7 +73,7 @@ When looking at the Data there is also a increase in Post Season Pitch
 Speed
 
 - 4-Seam Fastball +0.67 MPH  
-- **Changup +1.58 MPH**  
+- **Changeup +1.58 MPH**  
 - Curveball +0.55 MPH  
 - Cutter +0.71 MPH  
 - Sinker +1.14 MPH  
