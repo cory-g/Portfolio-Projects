@@ -36,10 +36,10 @@ library(gridExtra)
 spinrate <- read_csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/01-MLB-Spinrate-Data-in-R/MLB_Musgrove-Joe_Reg-Post-Season_Pitch-Data.csv")
 ```
 
-### Average Spinrate, Regular Season vs Post Season
+### Average Spinrate, Regular vs Post Season
 
-When looking at the Data there is a very clear increase in Post Season
-Spinrate
+When looking at the Data there was a clear increase in Post Season
+Spinrate.
 
 - 4-Seam Fastball +90.31 RPM  
 - Changeup +101.95 RPM  
@@ -49,17 +49,17 @@ Spinrate
 - **Slider +192.60 RPM**
 
 ``` r
-# Average Spin Rates by Season, Pitch Type
+# Average Spinrates by Pitch, Regular vs Post Season
 avg_spin <- spinrate %>% 
   group_by(season_type, pitch_name) %>% 
   summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2)) %>% 
   arrange(desc(season_type))
 
-# Scatter Plot: Average Spin Rate by Pitch, Regular vs Post Season  
+# Scatter Plot: Average Spinrate by Pitch, Regular vs Post Season  
 ggplot(avg_spin, aes(pitch_name, avg_spinrate, color = season_type)) +
   geom_point(size = 4, shape = 9) +
-  labs(title='Average Spin Rate, Pitch', subtitle='Regular Season vs Post Season',
-       color='Season Type', x='Type of Pitch', y='Average Spinrate',
+  labs(title='Average Spinrate', subtitle='Regular Season vs Post Season',
+       color='Season Type', x='Pitch Thrown', y='Average Spinrate',
        caption='Data Gathered from baseballsavant.mlb.com') +
   annotate('text', x=5.3, y=11, label='Slider Had the') +
   annotate('text', x=5.3, y=10.6, label='Largest Increase')
@@ -67,10 +67,10 @@ ggplot(avg_spin, aes(pitch_name, avg_spinrate, color = season_type)) +
 
 ![](musgrove-analysis_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
-### Average Speed MPH, Regular Season vs Post Season
+### Average Speed MPH, Regular vs Post Season
 
-When looking at the Data there is also a increase in Post Season Pitch
-Speed
+When looking at the Data there was also a increase in Post Season Pitch
+Speed.
 
 - 4-Seam Fastball +0.67 MPH  
 - **Changeup +1.58 MPH**  
@@ -80,26 +80,26 @@ Speed
 - Slider +0.16 MPH
 
 ``` r
-# Average Pitch Speed by Season, Pitch Type
+# Average Speed MPH by Pitch, Regular vs Post Season
 avg_speed <- spinrate %>% 
   group_by(season_type, pitch_name) %>% 
-  summarize(average_mpg = format(round(mean(effective_speed, na=TRUE), 2), nsmall=2)) %>% 
+  summarize(average_mph = format(round(mean(effective_speed, na=TRUE), 2), nsmall=2)) %>% 
   arrange(desc(season_type))
 
-# Scatter Plot: Average MPH by Pitch, Regular vs Post Season
-ggplot(avg_speed, aes(pitch_name, average_mpg, color = season_type)) +
+# Scatter Plot: Average Speed MPH by Pitch, Regular vs Post Season
+ggplot(avg_speed, aes(pitch_name, average_mph, color = season_type)) +
   geom_point(size = 4) +
-  labs(title='Average Speed MPH, Pitch', subtitle='Regular Season vs Post Season',
-       color='Season Type', x='Type of Pitch', y='Average Speed, MPH',
+  labs(title='Average Pitch Speed, MPH', subtitle='Regular Season vs Post Season',
+       color='Season Type', x='Pitch Thrown', y='Average Speed, MPH',
        caption='Data Gathered from baseballsavant.mlb.com')
 ```
 
 ![](musgrove-analysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-### With Two-Outs: Thrown for Strikeout by Pitch, Regular vs Post Season
+### With Two Strikes: Percent Thrown for Strikeout, Regular vs Post Season
 
 The Strikeout percentages decreased for all pitches, **except** the
-Slider
+Slider.
 
 - 4-Seam Fastball -0.02%  
 - Changeup -9.72%  
@@ -109,20 +109,20 @@ Slider
 - **Slider +2.41%**
 
 ``` r
-# With Two-Outs: Thrown for Strikeout by Pitch, Regular vs Post Season
-thrown_2out <- spinrate %>% 
+# With Two Strikes: Percent Thrown for Strikeout by Pitch, Regular vs Post Season
+two_strikes <- spinrate %>% 
   group_by(season_type, pitch_name) %>%
   filter(strikes == 2) %>%
   summarize(strikeouts = sum(at_bat_outcome == 'strikeout', na.rm=TRUE),
-            times_thrown_2out = sum(strikes == 2),
-            strikeout_pct = format(round((strikeouts/times_thrown_2out)*100, 2), nsmall=2)) %>%
+            times_thrown_2strikes = sum(strikes == 2),
+            strikeout_pct = format(round((strikeouts/times_thrown_2strikes)*100, 2), nsmall=2)) %>%
   arrange(desc(season_type)) 
 
-# Column Chart: With Two-Outs: Thrown for Strikeout by Pitch, Regular vs Post Season
-ggplot(thrown_2out, aes(pitch_name, strikeout_pct, fill = season_type)) +
+# Column Chart: With Two Strikes: Percent Thrown for Strikeout by Pitch, Regular vs Post Season
+ggplot(two_strikes, aes(pitch_name, strikeout_pct, fill = season_type)) +
   geom_col(position = 'dodge') +
-  labs(title='With Two-Outs: Thrown for Strikeout, Pitch', subtitle='Regular Season vs Post Season',
-       fill='Season Type', x='Type of Pitch', y='Strikeout Percentage',
+  labs(title='With Two Strikes: Percent Thrown for Strikeout', subtitle='Regular Season vs Post Season',
+       fill='Season Type', x='Pitch Thrown', y='Strikeout Percentage',
        caption='Data Gathered from baseballsavant.mlb.com') +
   annotate('text', x=5.3, y=11, label='Slider Was The') +
   annotate('text', x=5.3, y=10.6, label='Only Increase')
@@ -133,8 +133,9 @@ ggplot(thrown_2out, aes(pitch_name, strikeout_pct, fill = season_type)) +
 ### The Slider: Putting it under the Microscope
 
 The Slider was the most improved pitch in regard to increased Spinrate
-and Two-out Strikeout Percentage  
-The Speed increased but not a significant amount
+and Strikeout Percentage.  
+The Speed also slightly increased, but not what I would consider a
+significant amount.
 
 ``` r
 # Slider Strikeout Data
@@ -142,8 +143,8 @@ slider_strike <- spinrate %>%
   group_by(season_type, pitch_name) %>%
   filter(strikes == 2, pitch_name == 'Slider') %>%
   summarize(strikeouts = sum(at_bat_outcome == 'strikeout', na.rm=TRUE),
-            times_thrown_2out = sum(strikes == 2),
-            strikeout_pct = format(round((strikeouts/times_thrown_2out)*100, 2), nsmall=2)) %>%
+            times_thrown_2strikes = sum(strikes == 2),
+            strikeout_pct = format(round((strikeouts/times_thrown_2strikes)*100, 2), nsmall=2)) %>%
   arrange(desc(season_type))
 
 # Slider Spinrate Data
@@ -156,14 +157,14 @@ slider_sr <- spinrate %>%
 # Plotting Strikeout & Spinrate Data
 plot1 <- ggplot(slider_strike, aes(pitch_name, strikeout_pct, fill = season_type)) +
   geom_col(position = 'dodge') +
-  labs(title='With Two-Outs: Strikeout %', subtitle='Regular Season vs Post Season',
-       fill='Season Type', x='Slider, Pitch Thrown', y='Strikeout Percentage',
+  labs(title='Two Strikes: Strikeout Percentage', subtitle='Regular Season vs Post Season',
+       fill='Season Type', x='Pitch Thrown', y='Strikeout Percentage',
        caption='Data Gathered from baseballsavant.mlb.com')
 
 plot2 <- ggplot(slider_sr, aes(pitch_name, avg_spinrate, fill = season_type)) +
   geom_col(position = 'dodge') +
   labs(title='Average Spinrate, Slider', subtitle='Regular Season vs Post Season',
-       fill='Season Type', x='Slider, Pitch Thrown', y='Average Spinrate',
+       fill='Season Type', x='Pitch Thrown', y='Average Spinrate',
        caption='Data Gathered from baseballsavant.mlb.com')
 
 # Combining the Two Graphs Side-by-Side
@@ -175,15 +176,13 @@ grid.arrange(plot1, plot2, ncol=2)
 ### In Conclusion:
 
 Although there was never an official investigation into the pitcher’s
-use of a foreign substance during the game, I truly believe the data
-tells a different story.
+use of a foreign substance during the game, I believe the data tells a
+different story.
 
 I am of the opinion that the increases in Spinrate and Speed across all
-pitches points towards the use of a foreign substance to get a better
-grip on the ball.
+pitches points towards the use of a foreign substance on the ball.
 
-In particular with the Slider, the significant Spinrate increase seems
-to have caused it to be the only pitch which had a higher Post Season
-Strikeout Percentage.
+In particular with the Slider, the significant Spinrate increase made it
+a more effective pitch based on the Post Season Strikeout Percentages.
 
 #### We may never find out the truth, but **the data does not lie!**
