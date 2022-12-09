@@ -102,7 +102,7 @@ The Strikeout percentages decreased for all pitches, **except** the
 Slider
 
 - 4-Seam Fastball -0.02%  
-- Changup -9.72%  
+- Changeup -9.72%  
 - Curveball -5.81%  
 - Cutter -0.71%  
 - Sinker -14.81%  
