@@ -11,7 +11,7 @@ I have created this repo as a place to showcase some of the work I have done wit
 ## Contact Information
 I can be reached via e-mail at: Cory.Gargan@tuta.io   
 
-I can also be found on [LinkedIn](https://www.linkedin.com/in/cory-gargan-28001424b/), [Tableau Public](https://public.tableau.com/app/profile/cory.gargan), and [Kaggle](https://www.kaggle.com/corygargan)  
+I can also be found on [LinkedIn](https://www.linkedin.com/in/cory-gargan/), [Tableau Public](https://public.tableau.com/app/profile/cory.gargan), and [Kaggle](https://www.kaggle.com/corygargan)  
 
 
 ### Thank you again for stopping by!
