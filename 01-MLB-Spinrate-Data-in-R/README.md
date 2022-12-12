@@ -36,6 +36,77 @@ library(gridExtra)
 spinrate <- read_csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/01-MLB-Spinrate-Data-in-R/MLB_Musgrove-Joe_Reg-Post-Season_Pitch-Data.csv")
 ```
 
+### Average Spinrate, Regular vs NY Mets Post Season Game (10/09/2022)
+
+When looking at the Data there was a clear increase in Post Season
+Spinrate.
+
+- 4-Seam Fastball +106.71 RPM  
+- Changeup +176.64 RPM  
+- Curveball +171.15 RPM  
+- Cutter +116.67 RPM  
+- Sinker +105.55 RPM  
+- **Slider +249.19 RPM**
+
+``` r
+# Game in Question: Looking at Spinrates, Regular Season vs  Post Season Mets Game (10/09/22)
+reg_slider_sr <- spinrate %>% 
+  group_by(season_type, pitch_name) %>% 
+  filter(season_type == 'Regular Season') %>% 
+  summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2))
+reg_slider_sr
+```
+
+    ## # A tibble: 6 × 3
+    ## # Groups:   season_type [1]
+    ##   season_type    pitch_name      avg_spinrate
+    ##   <chr>          <chr>           <chr>       
+    ## 1 Regular Season 4-Seam Fastball 2559.32     
+    ## 2 Regular Season Changeup        1971.61     
+    ## 3 Regular Season Curveball       2721.77     
+    ## 4 Regular Season Cutter          2581.22     
+    ## 5 Regular Season Sinker          2435.65     
+    ## 6 Regular Season Slider          2714.75
+
+``` r
+mets_slider_sr <- spinrate %>% 
+  group_by(season_type, pitch_name) %>% 
+  filter(game_date == '10/9/2022') %>% 
+  summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2))
+mets_slider_sr
+```
+
+    ## # A tibble: 6 × 3
+    ## # Groups:   season_type [1]
+    ##   season_type pitch_name      avg_spinrate
+    ##   <chr>       <chr>           <chr>       
+    ## 1 Post Season 4-Seam Fastball 2666.03     
+    ## 2 Post Season Changeup        2148.25     
+    ## 3 Post Season Curveball       2892.92     
+    ## 4 Post Season Cutter          2697.89     
+    ## 5 Post Season Sinker          2541.20     
+    ## 6 Post Season Slider          2963.94
+
+``` r
+comb <- data.frame(reg_slider_sr, mets_slider_sr)
+
+# Graphing the above Spinrates
+ggplot(comb) + 
+  geom_point(aes(pitch_name, avg_spinrate, color = season_type)) +
+  geom_point(aes(pitch_name.1, avg_spinrate.1, color = season_type.1)) +
+  labs(title='Average Spinrate', subtitle='Regular Season vs Post Season Mets Game (10/09/22)',
+       color='Season Type', x='Pitch Thrown', y='Average Spinrate',
+       caption='Data Gathered from baseballsavant.mlb.com') +
+  annotate('text', x=5.3, y=10.5, label='+249.19 RPM', color = 'red') +
+  annotate('text', x=2.3, y=10.5, label='+171.15 RPM') +
+  annotate('text', x=1.6, y=5.9, label='+106.71 RPM') +
+  annotate('text', x=2.6, y=1.5, label='+176.64 RPM') +
+  annotate('text', x=4.6, y=6.9, label='+116.67 RPM') +
+  annotate('text', x=5.6, y=3.4, label='+105.55 RPM')
+```
+
+![](musgrove-analysis_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+
 ### Average Spinrate, Regular vs Post Season
 
 When looking at the Data there was a clear increase in Post Season
@@ -61,11 +132,15 @@ ggplot(avg_spin, aes(pitch_name, avg_spinrate, color = season_type)) +
   labs(title='Average Spinrate', subtitle='Regular Season vs Post Season',
        color='Season Type', x='Pitch Thrown', y='Average Spinrate',
        caption='Data Gathered from baseballsavant.mlb.com') +
-  annotate('text', x=5.3, y=11, label='Slider Had the') +
-  annotate('text', x=5.3, y=10.6, label='Largest Increase')
+  annotate('text', x=5.3, y=10.5, label='+192.60 RPM', color = 'red') +
+  annotate('text', x=2.3, y=10.5, label='+116.26 RPM') +
+  annotate('text', x=1.6, y=5.9, label='+90.31 RPM') +
+  annotate('text', x=2.6, y=1.5, label='+101.95 RPM') +
+  annotate('text', x=4.6, y=6.9, label='+83.30 RPM') +
+  annotate('text', x=5.6, y=3.4, label='+79.35 RPM')
 ```
 
-![](musgrove-analysis_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](musgrove-analysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 ### Average Speed MPH, Regular vs Post Season
 
@@ -94,7 +169,7 @@ ggplot(avg_speed, aes(pitch_name, average_mph, color = season_type)) +
        caption='Data Gathered from baseballsavant.mlb.com')
 ```
 
-![](musgrove-analysis_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](musgrove-analysis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 ### With Two Strikes: Percent Thrown for Strikeout, Regular vs Post Season
 
@@ -128,7 +203,7 @@ ggplot(two_strikes, aes(pitch_name, strikeout_pct, fill = season_type)) +
   annotate('text', x=5.3, y=10.6, label='Only Increase')
 ```
 
-![](musgrove-analysis_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](musgrove-analysis_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ### The Slider: Putting it under the Microscope
 
@@ -171,7 +246,7 @@ plot2 <- ggplot(slider_sr, aes(pitch_name, avg_spinrate, fill = season_type)) +
 grid.arrange(plot1, plot2, ncol=2)
 ```
 
-![](musgrove-analysis_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](musgrove-analysis_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ### In Conclusion:
 

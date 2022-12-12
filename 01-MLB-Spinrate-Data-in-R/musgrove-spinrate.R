@@ -8,8 +8,47 @@ spinrate <- read_csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/01-MLB
 
 ################################################################################
 
-# Looking at Spinrate Data
+# Looking at Spinrate Data, Game in Question (10/09/22)
 
+# Game in Question: Looking at Spinrates, Regular Season vs  Post Season Mets Game (10/09/22)
+reg_slider_sr <- spinrate %>% 
+  group_by(season_type, pitch_name) %>% 
+  filter(season_type == 'Regular Season') %>% 
+  summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2))
+reg_slider_sr
+
+mets_slider_sr <- spinrate %>% 
+  group_by(season_type, pitch_name) %>% 
+  filter(game_date == '10/9/2022') %>% 
+  summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2))
+mets_slider_sr
+
+comb <- data.frame(reg_slider_sr, mets_slider_sr)
+
+# Finding the Spinrate increase during the Mets Post Season Game (10/09/2022)
+comb <- comb %>% 
+  mutate(increase_spinrate=as.numeric(avg_spinrate.1)-as.numeric(avg_spinrate))
+comb
+
+
+# Graphing the above Spinrates
+ggplot(comb) + 
+  geom_point(aes(pitch_name, avg_spinrate, color = season_type)) +
+  geom_point(aes(pitch_name.1, avg_spinrate.1, color = season_type.1)) +
+  labs(title='Average Spinrate', subtitle='Regular Season vs Post Season Mets Game (10/09/22)',
+       color='Season Type', x='Pitch Thrown', y='Average Spinrate',
+       caption='Data Gathered from baseballsavant.mlb.com') +
+  annotate('text', x=5.3, y=10.5, label='+249.19 RPM', color = 'red') +
+  annotate('text', x=2.3, y=10.5, label='+171.15 RPM') +
+  annotate('text', x=1.6, y=5.9, label='+106.71 RPM') +
+  annotate('text', x=2.6, y=1.5, label='+176.64 RPM') +
+  annotate('text', x=4.6, y=6.9, label='+116.67 RPM') +
+  annotate('text', x=5.6, y=3.4, label='+105.55 RPM')
+
+
+################################################################################
+
+# Looking at Spinrate Data, Regular vs Post Season
 
 # Average Spinrates by Pitch, Regular vs Post Season
 avg_spin <- spinrate %>% 
@@ -25,10 +64,14 @@ ggplot(avg_spin, aes(pitch_name, avg_spinrate, color = season_type)) +
   labs(title='Average Spinrate', subtitle='Regular Season vs Post Season',
        color='Season Type', x='Pitch Thrown', y='Average Spinrate',
        caption='Data Gathered from baseballsavant.mlb.com') +
-  annotate('text', x=5.3, y=11, label='Slider Had the') +
-  annotate('text', x=5.3, y=10.6, label='Largest Increase')
+  annotate('text', x=5.3, y=10.5, label='+192.60 RPM', color = 'red') +
+  annotate('text', x=2.3, y=10.5, label='+116.26 RPM') +
+  annotate('text', x=1.6, y=5.9, label='+90.31 RPM') +
+  annotate('text', x=2.6, y=1.5, label='+101.95 RPM') +
+  annotate('text', x=4.6, y=6.9, label='+83.30 RPM') +
+  annotate('text', x=5.6, y=3.4, label='+79.35 RPM')
 
-  
+
 # Column Chart: Average Spinrate by Pitch, Regular vs Post Season
 ggplot(avg_spin, aes(pitch_name, avg_spinrate, fill = season_type)) +
   geom_col(position = "dodge") +
@@ -167,4 +210,3 @@ plot2 <- ggplot(slider_sr, aes(pitch_name, avg_spinrate, fill = season_type)) +
 
 # Combining the Two Graphs Side-by-Side
 grid.arrange(plot1, plot2, ncol=2)
-

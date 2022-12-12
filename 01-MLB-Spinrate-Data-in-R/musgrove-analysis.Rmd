@@ -4,8 +4,8 @@ author: "Cory Gargan"
 date: "2022-12-08"
 output:
   pdf_document: default
-  html_document: default
   github_document: default
+  html_document: default
 ---
 # Taking a Closer Look at Joe Musgrove's Spinrate
 #### Did he use a foreign substance to increase spinrate, and if so, did it have a significant impact on his Post Season?  
@@ -34,6 +34,47 @@ library(gridExtra)
 spinrate <- read_csv("~/Documents/Data-Analysis/Github/Portfolio-Projects/01-MLB-Spinrate-Data-in-R/MLB_Musgrove-Joe_Reg-Post-Season_Pitch-Data.csv")
 ```
 
+### Average Spinrate, Regular vs NY Mets Post Season Game (10/09/2022)  
+When looking at the Data there was a clear increase in Post Season Spinrate.  
+  
+  * 4-Seam Fastball +106.71 RPM  
+  * Changeup +176.64 RPM  
+  * Curveball +171.15 RPM  
+  * Cutter +116.67 RPM  
+  * Sinker +105.55 RPM  
+  * **Slider +249.19 RPM**  
+  
+```{r, message=FALSE, warning=FALSE}
+# Game in Question: Looking at Spinrates, Regular Season vs  Post Season Mets Game (10/09/22)
+reg_slider_sr <- spinrate %>% 
+  group_by(season_type, pitch_name) %>% 
+  filter(season_type == 'Regular Season') %>% 
+  summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2))
+reg_slider_sr
+
+mets_slider_sr <- spinrate %>% 
+  group_by(season_type, pitch_name) %>% 
+  filter(game_date == '10/9/2022') %>% 
+  summarize(avg_spinrate = format(round(mean(release_spin_rate), 2), nsmall=2))
+mets_slider_sr
+
+comb <- data.frame(reg_slider_sr, mets_slider_sr)
+
+# Graphing the above Spinrates
+ggplot(comb) + 
+  geom_point(aes(pitch_name, avg_spinrate, color = season_type)) +
+  geom_point(aes(pitch_name.1, avg_spinrate.1, color = season_type.1)) +
+  labs(title='Average Spinrate', subtitle='Regular Season vs Post Season Mets Game (10/09/22)',
+       color='Season Type', x='Pitch Thrown', y='Average Spinrate',
+       caption='Data Gathered from baseballsavant.mlb.com') +
+  annotate('text', x=5.3, y=10.5, label='+249.19 RPM', color = 'red') +
+  annotate('text', x=2.3, y=10.5, label='+171.15 RPM') +
+  annotate('text', x=1.6, y=5.9, label='+106.71 RPM') +
+  annotate('text', x=2.6, y=1.5, label='+176.64 RPM') +
+  annotate('text', x=4.6, y=6.9, label='+116.67 RPM') +
+  annotate('text', x=5.6, y=3.4, label='+105.55 RPM')
+```
+  
 ### Average Spinrate, Regular vs Post Season  
 When looking at the Data there was a clear increase in Post Season Spinrate.  
   
@@ -57,8 +98,12 @@ ggplot(avg_spin, aes(pitch_name, avg_spinrate, color = season_type)) +
   labs(title='Average Spinrate', subtitle='Regular Season vs Post Season',
        color='Season Type', x='Pitch Thrown', y='Average Spinrate',
        caption='Data Gathered from baseballsavant.mlb.com') +
-  annotate('text', x=5.3, y=11, label='Slider Had the') +
-  annotate('text', x=5.3, y=10.6, label='Largest Increase')
+  annotate('text', x=5.3, y=10.5, label='+192.60 RPM', color = 'red') +
+  annotate('text', x=2.3, y=10.5, label='+116.26 RPM') +
+  annotate('text', x=1.6, y=5.9, label='+90.31 RPM') +
+  annotate('text', x=2.6, y=1.5, label='+101.95 RPM') +
+  annotate('text', x=4.6, y=6.9, label='+83.30 RPM') +
+  annotate('text', x=5.6, y=3.4, label='+79.35 RPM')
 ```
   
 ### Average Speed MPH, Regular vs Post Season  
