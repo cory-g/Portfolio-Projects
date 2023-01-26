@@ -2,7 +2,7 @@
 
 ## About Me
 My name is **Cory Gargan** and I would like to thank you for stopping by.  
-I'm just an Aspiring (paid) Data Analyst who enjoys digging into data in search of what's really happening!  
+I'm just a guy who enjoys digging into data in search of what's really happening!  
 I am also a Father, Husband, dog lover. Avid mycologist & cacti propagator.
 
 ## What do we have here?
