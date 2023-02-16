@@ -6,7 +6,7 @@ I'm just a guy who enjoys digging into data in search of what's really happening
 I am also a dog lover, avid mycologist & cacti propagator.
 
 ## What do we have here?
-I have created this repo as a place to showcase some of the work I have done with SQL, R, Tableau, and Python.
+I have created this repo as a place to showcase some of the work I have done with SQL, R, Python, and Tableau.
 
 ## Contact Information
 I can be reached via e-mail at: Cory.Gargan@tuta.io   
