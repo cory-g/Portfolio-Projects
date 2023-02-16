@@ -3,10 +3,10 @@
 ## About Me
 My name is **Cory Gargan** and I would like to thank you for stopping by.  
 I'm just a guy who enjoys digging into data in search of what's really happening!  
-I am also a Father, Husband, dog lover. Avid mycologist & cacti propagator.
+I am also a dog lover, avid mycologist & cacti propagator.
 
 ## What do we have here?
-I have created this repo as a place to showcase some of the work I have done with SQL, R, and Tableau.
+I have created this repo as a place to showcase some of the work I have done with SQL, R, Tableau, and Python.
 
 ## Contact Information
 I can be reached via e-mail at: Cory.Gargan@tuta.io   
