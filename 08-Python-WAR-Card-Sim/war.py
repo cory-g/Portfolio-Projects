@@ -116,13 +116,13 @@ while game_on:
         else:
             print('WAR!')
             
-            if len(player_one.all_cards) < 5:
+            if len(player_one.all_cards) < 3:
                 print('Player One unable to declare WAR')
                 print('Player Two WINS!')
                 game_on = False
                 break
                 
-            elif len(player_two.all_cards) < 5:
+            elif len(player_two.all_cards) < 3:
                 print('Player Two unable to declare WAR')
                 print('Player One WINS!')
                 game_on = False
@@ -130,6 +130,6 @@ while game_on:
                 
             else:
                 
-                for num in range(5):
+                for num in range(3):
                     player_one_cards.append(player_one.remove_one())
                     player_two_cards.append(player_two.remove_one())
