@@ -7,7 +7,7 @@ import csv
 
 header = ['Title', 'Price', 'Date']
 
-with open('AmazonWebScraperDataset.csv', 'w', newline='', encoding='UTF8') as f:
+with open('AmazonScraperData.csv', 'w', newline='', encoding='UTF8') as f:
     writer = csv.writer(f)
     writer.writerow(header)
 
@@ -37,7 +37,7 @@ def check_price():
 
     data = [title, price, today]
 
-    with open('AmazonWebScraperDataset.csv', 'a+', newline='', encoding='UTF8') as f:
+    with open('AmazonScraperData.csv', 'a+', newline='', encoding='UTF8') as f:
         writer = csv.writer(f)
         writer.writerow(data)
 
