@@ -1,3 +1,4 @@
+# https://github.com/JustAnotherArchivist/snscrape.git
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
 import datetime
@@ -55,7 +56,7 @@ def scrape_criteria():
     print(df)
 
     num_tweets = str(df.shape[0])
-    new_subject = subject.replace(" ", "_")
+    new_subject = subject.replace(' ', '_')
     df.to_csv(new_subject + '_' + num_tweets + '-tweets_' + today + '.csv', index=False)
 
     print(f'\nOutput written to: {new_subject}_{num_tweets}-tweets_{today}.csv')
