@@ -27,7 +27,6 @@ def scrape_user():
 
     num_tweets = str(df.shape[0])
     df.to_csv(username + '_' + num_tweets + '-tweets_' + today + '.csv', index=False)
-#    df.to_csv(username + '_tweets_' + today + '.csv', index=False)
 
     print(f'\nOutput written to: {username}_{num_tweets}-tweets_{today}.csv')
 
