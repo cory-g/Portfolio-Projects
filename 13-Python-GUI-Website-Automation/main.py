@@ -82,9 +82,9 @@ def parse_args():
                         metavar="Number of Votes to Cast",
                         help="ex: 100")
     args = parser.parse_args()
-    # Store the values of the arguments, so we have them next time we run
+    # Store the values of the arguments
     with open(args_file, 'w') as data_file:
-        # Using vars(args) returns the data as a dictionary
+        # vars(args) returns the data as a dictionary
         json.dump(vars(args), data_file)
     return args
 
