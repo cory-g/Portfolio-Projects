@@ -62,7 +62,7 @@ def vote_now():
 
     time.sleep(.5)
     # Submitting the entry
-    nom_submit.click()
+    site_submit.click()
 
     time.sleep(3)
 
