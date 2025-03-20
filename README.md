@@ -7,7 +7,7 @@ I am also an avid amateur mycologist
 
 ## What do we have here?
 Just a space to check out some things I've done.\
-A blend of machine learning, a bit of SQL, a touch of R, and a strong dose of Python—all brought to life with vibrant lines and dots.\
+A blend of machine learning, a bit of SQL, a touch of R, and a strong dose of Python—all brought to life with vibrant lines and dots.  
 
 ## Contact Information
 I can be reached via e-mail at: Cory.Gargan@gmail.com\
